@@ -1,0 +1,225 @@
+/*
+========================================================|
+--------------------------------------------------------|
+
+                VARIABLES
+
+--------------------------------------------------------|
+========================================================|
+*/
+:root{
+
+    --ff-primary: system-ui;
+    --fc-primary: hsl(0 0% 90%);
+    --bc-primary: hsl(0 0% 10%);
+    --cc-primary: hsl(0 0% 0%);
+}
+/*
+========================================================|
+--------------------------------------------------------|
+
+                RESETS
+
+--------------------------------------------------------|
+========================================================|
+*/
+*,::before,::after{margin: 0;padding: 0;box-sizing: border-box;}
+/*
+========================================================|
+--------------------------------------------------------|
+
+                UTILITY CLASSES
+
+--------------------------------------------------------|
+========================================================|
+*/
+.btn{
+    cursor: pointer;
+}
+/*
+========================================================|
+--------------------------------------------------------|
+
+                SITE
+
+--------------------------------------------------------|
+========================================================|
+*/
+html{
+    font-family: var(--ff-primary);
+    color: var(--fc-primary);
+}
+body{
+    min-height: 100vh;
+    background-color: var(--bc-primary);
+}
+
+/*
+========================================================|
+--------------------------------------------------------|
+
+                STYLES
+
+--------------------------------------------------------|
+========================================================|
+*/
+
+/*
+--------------------------------------------------------|
+
+                APP
+
+--------------------------------------------------------|
+*/
+.app{
+    height: 100vh;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+}
+
+/*
+--------------------------------------------------------|
+
+                HEADER PRIMARY
+
+--------------------------------------------------------|
+*/
+.header-primary{
+    grid-column: 1;
+    grid-row: 1;
+
+    overflow: hidden;
+    
+}
+.header-primary > h1{
+    padding: 1rem;
+}
+.animation-options{
+    padding: 1rem;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 1rem;
+}
+.animation-options > button{
+    border: none;
+    background: none;
+    color: var(--fc-primary);
+    font-size: 1.5rem;
+    line-height: 1.5em;
+    font-weight: 700;
+}
+.animation-options > button:nth-child(1){
+    background-color: yellow;
+    color: black;
+}
+.animation-options > button:nth-child(2){
+    background-color: blue;
+    color: white;
+}
+.animation-options > button:nth-child(3){
+    background-color: pink;
+    color: black;
+}
+.animation-options > button:nth-child(4){
+    background-color: purple;
+    color: white;
+}
+
+
+
+
+/*
+--------------------------------------------------------|
+
+                MAIN / CANVAS
+
+--------------------------------------------------------|
+*/
+
+
+
+
+.main-content{
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.canvas{
+    width: 100%;
+    height: 100%;
+    background-color: var(--cc-primary);
+}
+
+
+
+/*
+--------------------------------------------------------|
+
+                FOOTER PRIMARY
+
+--------------------------------------------------------|
+*/
+
+
+
+
+
+.footer-primary{
+    grid-column: 1;
+    grid-row: 3;
+}
+.animation-controls{
+    padding: 1rem;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+.animation-controls > button{
+    background: none;
+    background-color: var(--bc-primary);
+    color: var(--fc-primary);
+    font-size: 1.5rem;
+    line-height: 1.5em;
+    font-weight: 700;
+    border-radius: 10px;
+    padding: 5px 10px;
+    text-transform: uppercase;
+}
+.animation-controls > button:hover{
+    background-color: hsl(0 0% 20%);
+}
+.start-btn{
+    border: 4px solid green;
+}
+.stop-btn{
+    border: 4px solid red;
+}
+/*
+========================================================|
+--------------------------------------------------------|
+
+                ANIMATIONS
+
+--------------------------------------------------------|
+========================================================|
+*/
+
+/*
+========================================================|
+--------------------------------------------------------|
+
+                MOBILE RESPONSE
+
+--------------------------------------------------------|
+========================================================|
+*/
