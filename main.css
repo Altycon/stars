@@ -89,8 +89,6 @@ body{
 .header-primary{
     grid-column: 1;
     grid-row: 1;
-
-    overflow: hidden;
     
 }
 .header-primary > h1{
