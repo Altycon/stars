@@ -4,22 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stars</title>
-    <link rel="stylesheet" href="/stars/main.css">
-    <script type="module" src="/stars/js/app.js"></script>
+    <link rel="stylesheet" href="/main.css">
+    <script type="module" src="/js/app.js"></script>
 </head>
 <body>
     <div class="app">
 
         <header class="header-primary">
 
-            <h1>Stars</h1>
+            <h1>Stars&nbsp;<span>&#9733;&#9733;</span></h1>
 
             <div class="animation-options">
 
-                <button type="button" class="btn active" value="1">1</button>
-                <button type="button" class="btn" value="2">2</button>
-                <button type="button" class="btn" value="3">3</button>
-                <button type="button" class="btn" value="4">4</button>
+                <button type="button" class="btn active inactive" value="1">1</button>
+                <button type="button" class="btn inactive" value="2">2</button>
+                <button type="button" class="btn inactive" value="3">3</button>
+                <button type="button" class="btn inactive" value="4">4</button>
             </div>
 
         </header>
@@ -34,9 +34,9 @@
 
             <div class="animation-controls">
 
-                <button type="button" id="AnimationStartButton" class="btn start-btn" value="start">Start</button>
+                <button type="button" id="AnimationStartButton" class="btn start-btn inactive" value="start">Start</button>
 
-                <button type="button" id="AnimationStopButton" class="btn stop-btn" value="stop">Stop</button>
+                <button type="button" id="AnimationStopButton" class="btn stop-btn inactive" value="stop">Stop</button>
             </div>
 
         </footer>

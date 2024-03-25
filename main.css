@@ -39,6 +39,11 @@
 .btn{
     cursor: pointer;
 }
+.inactive{
+    opacity: 0.2;
+    cursor: none;
+    pointer-events: none;
+}
 /*
 ========================================================|
 --------------------------------------------------------|
@@ -107,6 +112,11 @@ body{
     padding-top: 10px;
     font-size: 1.5rem;
 }
+.header-primary > h1 > span{
+    color: yellow;
+}
+
+
 .animation-options{
     padding: 1rem;
 
@@ -129,15 +139,16 @@ body{
     box-shadow: 5px 5px 10px black,
     inset -2px -2px 3px black,
     inset 2px 2px 3px hsl(0 0% 100% / 0.5);
+    pointer-events: all;
 
     transition: 100ms ease;
 }
 .animation-options > button:nth-child(1){
-    background-color: yellow;
+    background-color: hsl(180 100% 50%);
     color: black;
 }
 .animation-options > button:nth-child(2){
-    background-color: blue;
+    background-color: black;
     color: white;
 }
 .animation-options > button:nth-child(3){
@@ -174,6 +185,7 @@ body{
     opacity: 1;
     transform: translateX(-50%) scaleX(1);
 }
+
 
 /*
 --------------------------------------------------------|

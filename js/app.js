@@ -1,4 +1,5 @@
 import { GameOfLife } from "./game_of_life.js";
+import { SpaceTravel } from "./space_travel.js";
 
 const APP = {
 
@@ -34,13 +35,34 @@ const APP = {
 
             case 2:
 
+            APP.animationCallback = ()=>{
+
+                SpaceTravel.animate();
+            }
+
+            break;
+
+            case 3:
+
+            
+
+            break;
+
+            case 4:
+
+           
+
             break;
         }
+
+        console.log(`Animation "${animation}" set.`)
 
     },
     selectAnimation(event){
 
         event.preventDefault();
+
+        if(event.target.classList.contains('inactive')) return;
         
         document.querySelectorAll('.animation-options button').forEach( animationButton => {
 
@@ -51,7 +73,7 @@ const APP = {
 
         });
 
-        APP.setAnimation(event.target.value);
+        APP.setAnimation(+event.target.value);
 
         event.target.classList.add('active');
 
@@ -140,6 +162,19 @@ const APP = {
 
         document.querySelector('.main-content').classList.remove('loading');
     },
+    initializeGameOfLife(){
+
+        GameOfLife.initialize(APP.canvas, innerWidth < 800 ? 4:5);
+
+        GameOfLife.setColor('hsl(180 100% 50%)');
+
+        GameOfLife.buildRandomGrid();
+    },
+    initializeSpaceTravel(){
+
+        SpaceTravel.initialize(APP.canvas);
+
+    },
     initialize(){
 
         APP.startLoading();
@@ -147,6 +182,15 @@ const APP = {
         setTimeout( ()=> {
 
             APP.listen();
+
+            document.querySelectorAll('button.inactive').forEach( (button,index) => {
+
+                if(index < 2) button.classList.remove('inactive');
+    
+            });
+
+            document.querySelector('#AnimationStartButton').classList.remove('inactive');
+            document.querySelector('#AnimationStopButton').classList.remove('inactive');
 
             APP.stopLoading();
         },3000)
@@ -156,13 +200,9 @@ const APP = {
             document.querySelector('.main-content')
         );
 
-        GameOfLife.initialize(APP.canvas, innerWidth < 800 ? 10:5);
+        APP.initializeGameOfLife();
 
-        GameOfLife.setColor('hsl(180 100% 50%)');
-
-        GameOfLife.buildRandomGrid();
-
-        
+        APP.initializeSpaceTravel();
 
         APP.setAnimation(1);
     }
