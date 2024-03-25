@@ -13,6 +13,9 @@
     --fc-primary: hsl(0 0% 90%);
     --bc-primary: hsl(0 0% 10%);
     --cc-primary: hsl(0 0% 0%);
+
+    --header-height: 120px;
+    --footer-height: 100px;
 }
 /*
 ========================================================|
@@ -93,7 +96,7 @@ body{
     grid-column: 1;
     grid-row: 1;
     
-    height: 8rem;
+    height: var(--header-height);
 }
 .header-primary > h1{
     
@@ -178,15 +181,19 @@ body{
 
 
 .main-content{
-    position: relative;
-
     grid-column: 1;
     grid-row: 2;
+
+    position: relative;
+    isolation: isolate;
+    height: calc(100vh - var(--header-height) - var(--footer-height));
+    
 }
 
 .canvas{
     position: absolute;
     top: 0; left: 0;
+    z-index: -1;
     
     background-color: var(--cc-primary);
 }
@@ -208,13 +215,19 @@ body{
 .footer-primary{
     grid-column: 1;
     grid-row: 3;
+    background-color: var(--bc-primary);
+    height: var(--footer-height);
+
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    align-items: center;
 }
 .animation-controls{
-    padding: 1rem;
 
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto;
+    grid-template-rows: 1fr;
     align-items: center;
     justify-content: center;
     gap: 1rem;
