@@ -2,7 +2,7 @@
 
 export const SpaceTravel = {
 
-    totalStars: 500,
+    totalStars: 250,
     starSpeed: 10,
     stars: undefined,
     canvas: undefined,
@@ -27,7 +27,7 @@ export const SpaceTravel = {
         const sy = distance * Math.sin(angle);
         const x = sx;
         const y = sy;
-        const vx = SpaceTravel.randomRange(-1,1); // should this be -1 or 1 ? OR a number between -1 and 1 ?
+        const vx = SpaceTravel.randomRange(-1,1);
         const vy = SpaceTravel.randomRange(-1,1);
         const radius = SpaceTravel.randomRange(1,2);
         const hue = SpaceTravel.randomRange(30,40,true);
@@ -119,6 +119,5 @@ export const SpaceTravel = {
 
         SpaceTravel.stars = SpaceTravel.createStars();
 
-        console.log(SpaceTravel.stars)
     }
 };

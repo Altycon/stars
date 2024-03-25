@@ -55,8 +55,6 @@ const APP = {
             break;
         }
 
-        console.log(`Animation "${animation}" set.`)
-
     },
     selectAnimation(event){
 
@@ -130,7 +128,7 @@ const APP = {
 
         function loop(timestamp){
 
-            const delta = timestamp - APP.animationTime;
+            //const delta = timestamp - APP.animationTime;
 
             APP.animationCallback();
 
@@ -147,8 +145,6 @@ const APP = {
         }
 
         APP.animationId = requestAnimationFrame(loop);
-
-        console.log(APP.animationId)
     },
     startLoading(){
 
