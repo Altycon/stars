@@ -86,11 +86,11 @@ const APP = {
         document.querySelector('#AnimationStopButton').addEventListener('click', APP.stopAnimation);
 
     },
-    fixCanvas(canvas){
-        const main = document.querySelector('.main-content');
-
-        const styleWidth = + getComputedStyle(main).getPropertyValue('width').slice(0, -2);
-        const styleHeight = + getComputedStyle(main).getPropertyValue('height').slice(0, -2);
+    fixCanvas(canvas,parent){
+    
+        const styleWidth = +getComputedStyle(parent).getPropertyValue('width').slice(0, -2);
+        const styleHeight = +getComputedStyle(parent).getPropertyValue('height').slice(0, -2);
+        
         canvas.setAttribute('width', styleWidth * APP.DPI);
         canvas.setAttribute('height', styleHeight * APP.DPI);
         return canvas;
@@ -128,27 +128,44 @@ const APP = {
 
         console.log(APP.animationId)
     },
+    startLoading(){
+
+        APP.setState('loading');
+
+        document.querySelector('.main-content').classList.add('loading');
+    },
+    stopLoading(){
+
+        APP.setState('started');
+
+        document.querySelector('.main-content').classList.remove('loading');
+    },
     initialize(){
+
+        APP.startLoading();
+
+        setTimeout( ()=> {
+
+            APP.listen();
+
+            APP.stopLoading();
+        },3000)
         
-        APP.canvas = APP.fixCanvas(document.querySelector('.canvas'));
+        APP.canvas = APP.fixCanvas(
+            document.querySelector('.canvas'),
+            document.querySelector('.main-content')
+        );
 
-        // APP.context = APP.canvas.getContext('2d');
-
-        // APP.canvasWidth = APP.canvas.width;
-        // APP.canvasHeight = APP.canvas.height;
-
-        // APP.renderText('This is new', APP.canvasWidth*0.5, APP.canvasHeight*0.5,'red');
-
-        GameOfLife.initialize(APP.canvas);
+        GameOfLife.initialize(APP.canvas, innerWidth < 800 ? 10:5);
 
         GameOfLife.setColor('hsl(180 100% 50%)');
 
         GameOfLife.buildRandomGrid();
 
-        APP.listen();
+        
 
         APP.setAnimation(1);
     }
 };
 
-document.addEventListener('DOMContentLoaded', APP.initialize);
+APP.initialize();

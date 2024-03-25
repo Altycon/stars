@@ -78,7 +78,7 @@ body{
 .app{
     width: 100vw;
     height: 100vh;
-    overflow: hidden;
+    
 
     display: grid;
     grid-template-columns: 1fr;
@@ -97,9 +97,15 @@ body{
     grid-row: 1;
     
     height: var(--header-height);
+
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
 }
 .header-primary > h1{
-    
+    padding-left: 1rem;
+    padding-top: 10px;
+    font-size: 1.5rem;
 }
 .animation-options{
     padding: 1rem;
@@ -155,7 +161,7 @@ body{
     top: 120%; left: 50%;
     width: 66%;
     height: 20%;
-    background-color: green;
+    background-color: limegreen;
     border-radius: 10px;
 
     opacity: 0;
@@ -189,10 +195,42 @@ body{
     height: calc(100vh - var(--header-height) - var(--footer-height));
     
 }
+.main-content::before{
+    content: "loading...";
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: hsl(0 0% 0% / 0.9);
+    color: var(--fc-primary);
+    font-size: 2rem;
+    font-weight: 900;
+    opacity: 0;
 
+    display: none;
+    place-content: center;
+}
+.main-content.loading::before{
+    display: grid;
+    opacity: 1;
+    animation: loading 1s linear infinite;
+}
+@keyframes loading {
+    0%{
+        opacity: 0;
+    }
+    50%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+    }
+}
 .canvas{
     position: absolute;
     top: 0; left: 0;
+    width: 100%;
+    height: 100%;
     z-index: -1;
     
     background-color: var(--cc-primary);

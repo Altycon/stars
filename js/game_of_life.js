@@ -3,7 +3,7 @@
 export const GameOfLife = {
     canvas: undefined,
     overlayCanvas: undefined,
-    resolution: 5,
+    resolution: undefined,
     context: undefined,
     overlayContext: undefined,
     fillStyle: 'hsl(180 100% 50%)',
@@ -31,10 +31,14 @@ export const GameOfLife = {
     },
     buildRandomGrid(){
         GameOfLife.loopGrid((i)=>{
-            GameOfLife.grid[i] = Math.random() > 0.5 ? 1:0;
+
+            const rand = Math.random() > 0.5 ? 1:0;
+
+            GameOfLife.grid[i] = rand;
+            GameOfLife.nextGeneration[i] = rand;
         });
     },
-    checkNeighbors(row,col){
+    checkNeighbors(row,col,indx){
         let numberOfNeighbors = 0;
         
         for(let i = -1; i <= 1; i++){
@@ -47,15 +51,10 @@ export const GameOfLife = {
 
             }
         }
-        return numberOfNeighbors - GameOfLife.grid[row * GameOfLife.columns + col];
+        return numberOfNeighbors - GameOfLife.grid[indx];
     },
     update(){
-        GameOfLife.loopGrid((i)=>{
-
-            GameOfLife.nextGeneration[i] = GameOfLife.grid[i];
-
-        });
-
+        
         GameOfLife.loopGrid((i)=>{
 
             const cell = GameOfLife.grid[i];
@@ -63,7 +62,7 @@ export const GameOfLife = {
             const row = Math.floor(i / GameOfLife.columns);
             const column = i % GameOfLife.columns;
 
-            const numberOfNeighbors = GameOfLife.checkNeighbors(row,column);
+            const numberOfNeighbors = GameOfLife.checkNeighbors(row,column,i);
 
             if((cell & 1) === 1 && (numberOfNeighbors < 2 || numberOfNeighbors > 3)){
 
@@ -109,9 +108,10 @@ export const GameOfLife = {
         });
         
     },
-    initialize(canvasElement){
+    initialize(canvasElement,resolution = 10){
 
         GameOfLife.canvas = canvasElement;
+        GameOfLife.resolution = resolution;
         GameOfLife.context = canvasElement.getContext('2d');
         GameOfLife.width = canvasElement.width;
         GameOfLife.height = canvasElement.height;
