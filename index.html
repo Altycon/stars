@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stars</title>
-    <link rel="stylesheet" href="/stars/main.css">
-    <script type="module" src="/stars/js/app.js"></script>
+    <link rel="stylesheet" href="/main.css">
+    <script type="module" src="/js/app.js"></script>
 </head>
 <body>
     <div class="app">
@@ -16,10 +16,10 @@
 
             <div class="animation-options">
 
-                <button type="button" class="btn">1</button>
-                <button type="button" class="btn">2</button>
-                <button type="button" class="btn">3</button>
-                <button type="button" class="btn">4</button>
+                <button type="button" class="btn active" value="1">1</button>
+                <button type="button" class="btn" value="2">2</button>
+                <button type="button" class="btn" value="3">3</button>
+                <button type="button" class="btn" value="4">4</button>
             </div>
 
         </header>
@@ -34,9 +34,9 @@
 
             <div class="animation-controls">
 
-                <button type="button" class="btn start-btn">Start</button>
+                <button type="button" id="AnimationStartButton" class="btn start-btn" value="start">Start</button>
 
-                <button type="button" class="btn stop-btn">Stop</button>
+                <button type="button" id="AnimationStopButton" class="btn stop-btn" value="stop">Stop</button>
             </div>
 
         </footer>
