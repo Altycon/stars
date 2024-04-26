@@ -1,11 +1,5 @@
 
-
-function randomNumberBetween(min,max){
-    return Math.random() * (max-min)+min;
-}
-function scale (number, inMin, inMax, outMin, outMax) {
-    return (number - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
-}
+import { randomNumberBetween } from "./utilities.js";
 
 
 export const Coming = {

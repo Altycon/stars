@@ -1,12 +1,14 @@
 import { GameOfLife } from "./game_of_life.js";
 import { SpaceTravel } from "./space_travel.js";
 import { Coming } from "./coming.js";
+import { Freaky } from "./freaky_dots.js";
 
 const APP = {
 
     state: 'started',
     DPI: devicePixelRatio,
     canvas: undefined,
+    rotatingCanvas: undefined,
     context: undefined,
     canvasWidth: undefined,
     canvasHeight: undefined,
@@ -25,6 +27,12 @@ const APP = {
 
             case 1:
 
+            if(APP.rotatingCanvas.classList.contains('show')){
+
+                APP.rotatingCanvas.classList.remove('show');
+                APP.rotatingCanvas.classList.remove('rotate');
+            }
+
             APP.animationCallback = ()=>{
 
                 GameOfLife.update();
@@ -36,6 +44,12 @@ const APP = {
 
             case 2:
 
+            if(APP.rotatingCanvas.classList.contains('show')){
+
+                APP.rotatingCanvas.classList.remove('show');
+                APP.rotatingCanvas.classList.remove('rotate');
+            }
+
             APP.animationCallback = ()=>{
 
                 SpaceTravel.animate();
@@ -45,6 +59,12 @@ const APP = {
 
             case 3:
 
+            if(APP.rotatingCanvas.classList.contains('show')){
+
+                APP.rotatingCanvas.classList.remove('show');
+                APP.rotatingCanvas.classList.remove('rotate');
+            }
+
             APP.animationCallback = ()=>{
 
                 Coming.animate();
@@ -53,6 +73,18 @@ const APP = {
             break;
 
             case 4:
+
+            if(!APP.rotatingCanvas.classList.contains('show')){
+
+                APP.rotatingCanvas.classList.add('show');
+                APP.rotatingCanvas.classList.add('rotate');
+            }
+
+            APP.animationCallback = ()=>{
+
+                Freaky.renderCanvasDots();
+                Freaky.renderRotatingCanvasDots();
+            }
 
            
 
@@ -158,7 +190,7 @@ const APP = {
     },
     stopLoading(){
 
-        APP.setState('started');
+        APP.setState('ready');
 
         document.querySelector('.main-content').classList.remove('loading');
     },
@@ -179,6 +211,10 @@ const APP = {
 
         Coming.initialize(APP.canvas);
     },
+    initializeFreaky(){
+
+        Freaky.initialize(APP.canvas, APP.rotatingCanvas);
+    },
     initialize(){
 
         APP.startLoading();
@@ -189,7 +225,7 @@ const APP = {
 
             document.querySelectorAll('button.inactive').forEach( (button,index) => {
 
-                if(index < 3) button.classList.remove('inactive');
+                button.classList.remove('inactive');
     
             });
 
@@ -204,11 +240,18 @@ const APP = {
             document.querySelector('.main-content')
         );
 
+        APP.rotatingCanvas = APP.fixCanvas(
+            document.querySelector('.rotating-canvas'),
+            document.querySelector('.main-content')
+        );
+
         APP.initializeGameOfLife();
 
         APP.initializeSpaceTravel();
 
         APP.initializeComing();
+
+        APP.initializeFreaky();
 
         APP.setAnimation(1);
     }

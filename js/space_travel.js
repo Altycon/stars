@@ -90,6 +90,13 @@ export const SpaceTravel = {
         SpaceTravel.context.stroke();
         SpaceTravel.context.fill();
     },
+    render(){
+
+        for(let i = 0; i < SpaceTravel.stars.length; i++){
+            
+            SpaceTravel.renderStar(SpaceTravel.stars[i]);
+        }
+    },
     animate(){
 
         SpaceTravel.context.save();
