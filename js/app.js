@@ -164,7 +164,7 @@ const APP = {
     },
     initializeGameOfLife(){
 
-        GameOfLife.initialize(APP.canvas, innerWidth < 800 ? 4:5);
+        GameOfLife.initialize(APP.canvas, innerWidth < 800 ? 4:2);
 
         GameOfLife.setColor('hsl(180 100% 50%)');
 
