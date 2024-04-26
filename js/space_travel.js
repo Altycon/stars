@@ -64,7 +64,7 @@ export const SpaceTravel = {
         if(star.startPosition.x < -SpaceTravel.canvasWidth/2 || star.startPosition.y < -SpaceTravel.canvasHeight/2 || 
             star.startPosition.x > SpaceTravel.canvasWidth/2 || star.startPosition.y > SpaceTravel.canvasHeight/2){
 
-            star.radius = SpaceTravel.randomRange(0,1,true);
+            star.radius = SpaceTravel.randomRange(0,1);
             star.distance = SpaceTravel.randomRange(100,SpaceTravel.canvasWidth*0.5);
             star.startPosition.x = star.distance * Math.cos(star.angle);
             star.startPosition.y = star.distance * Math.sin(star.angle);

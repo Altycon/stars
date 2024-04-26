@@ -1,5 +1,6 @@
 import { GameOfLife } from "./game_of_life.js";
 import { SpaceTravel } from "./space_travel.js";
+import { Coming } from "./coming.js";
 
 const APP = {
 
@@ -44,7 +45,10 @@ const APP = {
 
             case 3:
 
-            
+            APP.animationCallback = ()=>{
+
+                Coming.animate();
+            }
 
             break;
 
@@ -171,6 +175,10 @@ const APP = {
         SpaceTravel.initialize(APP.canvas);
 
     },
+    initializeComing(){
+
+        Coming.initialize(APP.canvas);
+    },
     initialize(){
 
         APP.startLoading();
@@ -181,7 +189,7 @@ const APP = {
 
             document.querySelectorAll('button.inactive').forEach( (button,index) => {
 
-                if(index < 2) button.classList.remove('inactive');
+                if(index < 3) button.classList.remove('inactive');
     
             });
 
@@ -199,6 +207,8 @@ const APP = {
         APP.initializeGameOfLife();
 
         APP.initializeSpaceTravel();
+
+        APP.initializeComing();
 
         APP.setAnimation(1);
     }
