@@ -34,6 +34,7 @@ const APP = {
             }
 
             GameOfLife.setColor('hsl(180 100% 50%)');
+            
 
             APP.animationCallback = ()=>{
 
@@ -75,7 +76,7 @@ const APP = {
             break;
 
             case 4:
-
+            
             if(!APP.rotatingCanvas.classList.contains('show')){
 
                 APP.rotatingCanvas.classList.add('show');
@@ -116,7 +117,6 @@ const APP = {
             }
 
             Freaky.setContextColor('hsl(220 100% 80%)');
-            Freaky.adjustGridPosition();
 
             APP.animationCallback = ()=>{
 
@@ -147,32 +147,56 @@ const APP = {
         APP.setAnimation(+event.target.value);
 
         event.target.classList.add('active');
+        
 
     },
     stopAnimation(event){
 
-        event.preventDefault();
+        if(event) event.preventDefault();
 
         APP.setState('stopped');
 
         APP.animationId = undefined;
 
-        if(APP.rotatingCanvas.classList.contains('show')){
+        const activeButton = document.querySelector('.animation-options button.active');
+        
+        if(activeButton.value === "4" || activeButton.value === "5"){
 
-            APP.rotatingCanvas.classList.remove('show');
+            if(APP.rotatingCanvas.classList.contains('show')){
 
-            if(APP.rotatingCanvas.classList.contains('rotate-small')){
-                APP.rotatingCanvas.classList.remove('rotate-small');
-            }
-            if(APP.rotatingCanvas.classList.contains('rotate-full')){
-                APP.rotatingCanvas.classList.remove('rotate-full');
+                APP.rotatingCanvas.classList.remove('show');
+    
+                if(APP.rotatingCanvas.classList.contains('rotate-small')){
+                    APP.rotatingCanvas.classList.remove('rotate-small');
+                }
+                if(APP.rotatingCanvas.classList.contains('rotate-full')){
+                    APP.rotatingCanvas.classList.remove('rotate-full');
+                }
             }
         }
+        
 
     },
     startAnimation(event){
 
         event.preventDefault();
+
+        const activeButton = document.querySelector('.animation-options button.active');
+        
+        if(activeButton.value === "4" || activeButton.value === "5"){
+
+            if(!APP.rotatingCanvas.classList.contains('show')){
+
+                APP.rotatingCanvas.classList.add('show');
+    
+                if(activeButton.value === "4"){
+                    APP.rotatingCanvas.classList.add('rotate-small');
+                }
+                if(activeButton.value === "5"){
+                    APP.rotatingCanvas.classList.add('rotate-full');
+                }
+            }
+        }
 
         APP.setState('started');
 

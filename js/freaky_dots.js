@@ -40,6 +40,13 @@ export const Freaky = {
     renderCanvasDots(){
         Freaky.context.clearRect(0, 0, Freaky.canvasWidth, Freaky.canvasHeight);
 
+        Freaky.context.save();
+        Freaky.context.translate(
+            (Freaky.canvasWidth - (Freaky.gridColumns * Freaky.resolution)) * 0.5,
+            (Freaky.canvasHeight - (Freaky.gridRows * Freaky.resolution)) * 0.5
+        );
+        
+
         for(let i = 0; i < Freaky.totalDots; i++){
 
             const dot = Freaky.dots[i];
@@ -48,10 +55,18 @@ export const Freaky = {
             Freaky.context.arc(dot.x, dot.y, Freaky.dotSize, 0, TWO_PI);
             Freaky.context.fill();
         }
+
+        Freaky.context.restore();
     },
     renderRotatingCanvasDots(){
         Freaky.rotatingContext.clearRect(0, 0, Freaky.rotatingCanvasWidth, Freaky.rotatingCanvasHeight);
 
+        Freaky.rotatingContext.save();
+        Freaky.rotatingContext.translate(
+            (Freaky.rotatingCanvasWidth - (Freaky.gridColumns * Freaky.resolution)) * 0.5,
+            (Freaky.rotatingCanvasHeight - (Freaky.gridRows * Freaky.resolution)) * 0.5
+        );
+        
         for(let i = 0; i < Freaky.totalDots; i++){
 
             const dot = Freaky.dots[i];
@@ -60,6 +75,7 @@ export const Freaky = {
             Freaky.rotatingContext.arc(dot.x, dot.y, Freaky.dotSize, 0, TWO_PI);
             Freaky.rotatingContext.fill();
         }
+        Freaky.rotatingContext.restore();
     },
     
     createTriangles(){
@@ -74,18 +90,6 @@ export const Freaky = {
 
             Freaky.grid[i] = i % 2 === 0 ? 1:0;
         }
-    },
-    adjustGridPosition(){
-
-        Freaky.context.translate(
-            (Freaky.canvasWidth - (Freaky.gridColumns * Freaky.resolution)) * 0.5,
-            (Freaky.canvasHeight - (Freaky.gridRows * Freaky.resolution)) * 0.5
-        )
-
-        Freaky.rotatingContext.translate(
-            (Freaky.rotatingCanvasWidth - (Freaky.gridColumns * Freaky.resolution)) * 0.5,
-            (Freaky.rotatingCanvasHeight - (Freaky.gridRows * Freaky.resolution)) * 0.5
-        )
     },
     renderCanvasGrid(){
         
