@@ -1,11 +1,16 @@
 import { TWO_PI,randomNumberBetween } from "./utilities.js";
 
 export const Freaky = {
+    resolution: 10,
     totalDots: 1000,
     dots: [],
     dotColor: 'white',
     dotSize: 2,
     triangles: [],
+    grid: undefined,
+    gridColumns: undefined,
+    gridRows: undefined,
+    gridLength: undefined,
     canvas: undefined,
     context: undefined,
     canvasWidth: undefined,
@@ -15,6 +20,14 @@ export const Freaky = {
     rotatingCanvasWidth: undefined,
     rotatingCanvasHeight: undefined,
 
+    setContextColor(color){
+
+        if(!color) color = Freaky.dotColor;
+        if(Freaky.context && Freaky.rotatingContext){
+            Freaky.context.fillStyle = color;
+            Freaky.rotatingContext.fillStyle = color;
+        }
+    },
     createDots(){
         for(let i = 0; i < Freaky.totalDots; i++){
 
@@ -26,7 +39,6 @@ export const Freaky = {
     },
     renderCanvasDots(){
         Freaky.context.clearRect(0, 0, Freaky.canvasWidth, Freaky.canvasHeight);
-        Freaky.context.fillStyle = Freaky.dotColor;
 
         for(let i = 0; i < Freaky.totalDots; i++){
 
@@ -39,7 +51,6 @@ export const Freaky = {
     },
     renderRotatingCanvasDots(){
         Freaky.rotatingContext.clearRect(0, 0, Freaky.rotatingCanvasWidth, Freaky.rotatingCanvasHeight);
-        Freaky.rotatingContext.fillStyle = Freaky.dotColor;
 
         for(let i = 0; i < Freaky.totalDots; i++){
 
@@ -50,44 +61,78 @@ export const Freaky = {
             Freaky.rotatingContext.fill();
         }
     },
-    createGrid(){
-        // const Columns = canvas.width/divider;
-        // const Rows = canvas.height/divider;
-        // let temp = 0;
-        // let arr = [];
-        // for(let i = 0; i < Columns; i++){
-        //     let tempArr = [];
-        //     for(let j = 0; j < Rows; j++){
-        //         if(temp === 0){
-        //             tempArr.push(temp);
-        //             temp = 1;
-        //         }else{
-        //             tempArr.push(1);
-        //             temp = 0;
-        //         }
-        //     }
-        //     arr.push(tempArr);
-        // }
-    },
+    
     createTriangles(){
-        // const angle1 = 30 * Math.PI/180;
-        // const angle2 = -30 * Math.PI/180;
+        const angle1 = 30 * Math.PI/180;
+        const angle2 = -30 * Math.PI/180;
 
-        // for(let col = 0; col < grid.length; col++){
-        //     for(let row = 0; row < grid[col].length; row++){
-        //         const cell = grid[col][row];
-        //         let x = (col * cellSize) + cellSize/2;
-        //         let y = (row * cellSize);
-                
-            
-        //         let x2 = x + (cellSize) * Math.sin(angle1);
-        //         let y2 = y + (cellSize) * Math.cos(angle1);
-        //         let x3 = x + (cellSize) * Math.sin(angle2);
-        //         let y3 = y + (cellSize) * Math.cos(angle2);
-        //     }
-        // }
+       
     },
-    renderCanvasTriangle(){
+    createGrid(){
+            
+        for(let i = 0; i < Freaky.gridLength; i++){
+
+            Freaky.grid[i] = i % 2 === 0 ? 1:0;
+        }
+    },
+    adjustGridPosition(){
+
+        Freaky.context.translate(
+            (Freaky.canvasWidth - (Freaky.gridColumns * Freaky.resolution)) * 0.5,
+            (Freaky.canvasHeight - (Freaky.gridRows * Freaky.resolution)) * 0.5
+        )
+
+        Freaky.rotatingContext.translate(
+            (Freaky.rotatingCanvasWidth - (Freaky.gridColumns * Freaky.resolution)) * 0.5,
+            (Freaky.rotatingCanvasHeight - (Freaky.gridRows * Freaky.resolution)) * 0.5
+        )
+    },
+    renderCanvasGrid(){
+        
+        Freaky.context.clearRect(0, 0, Freaky.canvasWidth, Freaky.canvasHeight);
+        
+        for(let i = 0; i < Freaky.gridLength; i++){
+
+            const col = i % Freaky.gridColumns;
+            const row = Math.floor(i/Freaky.gridColumns);
+
+            const cell = Freaky.grid[i];
+
+            if(cell === 1){
+                Freaky.context.fillRect(
+                    col * Freaky.resolution,
+                    row * Freaky.resolution,
+                    Freaky.resolution,
+                    Freaky.resolution
+                )
+            }
+            
+        }
+    },
+    renderRotatingCanvasGrid(){
+        
+        Freaky.rotatingContext.clearRect(0, 0, Freaky.rotatingCanvasWidth, Freaky.rotatingCanvasHeight);
+        
+        for(let i = 0; i < Freaky.gridLength; i++){
+
+            const col = i % Freaky.gridColumns;
+            const row = Math.floor(i/Freaky.gridColumns);
+
+            const cell = Freaky.grid[i];
+
+            if(cell === 1){
+                Freaky.rotatingContext.fillRect(
+                    col * Freaky.resolution,
+                    row * Freaky.resolution,
+                    Freaky.resolution,
+                    Freaky.resolution
+                )
+            }
+            
+        }
+    },
+    createSquares(){
+
 
     },
     initialize(canvasElement,rotatingCanvasElement){
@@ -101,9 +146,16 @@ export const Freaky = {
         Freaky.rotatingCanvasWidth = rotatingCanvasElement.width;
         Freaky.rotatingCanvasHeight = rotatingCanvasElement.height;
 
+        Freaky.context.fillStyle = Freaky.dotColor;
+        Freaky.rotatingContext.fillStyle = Freaky.dotColor;
+
+        Freaky.gridColumns = Math.floor(Freaky.canvasWidth/Freaky.resolution);
+        Freaky.gridRows = Math.floor(Freaky.canvasHeight/Freaky.resolution);
+        Freaky.gridLength = Freaky.gridColumns * Freaky.gridRows;
+        Freaky.grid = new Uint8Array(Freaky.gridLength);
+
+        Freaky.createGrid();
         Freaky.createDots();
 
-        console.log(Freaky.canvas);
-        console.log(Freaky.rotatingCanvas)
     }
 }

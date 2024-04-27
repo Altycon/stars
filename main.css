@@ -121,7 +121,7 @@ body{
     padding: 1rem;
 
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     grid-template-rows: auto;
     align-items: center;
     justify-content: space-evenly;
@@ -157,6 +157,10 @@ body{
 }
 .animation-options > button:nth-child(4){
     background-color: purple;
+    color: white;
+}
+.animation-options > button:nth-child(5){
+    background-color: blue;
     color: white;
 }
 .animation-options > button:hover{
@@ -204,6 +208,7 @@ body{
 
     position: relative;
     isolation: isolate;
+    overflow: hidden;
     height: calc(100vh - var(--header-height) - var(--footer-height));
     
 }
@@ -262,10 +267,13 @@ body{
 .rotating-canvas.show{
     opacity: 1;
 }
-.rotating-canvas.rotate{
-    animation: rotateCanvas 20s linear infinite;
+.rotating-canvas.rotate-small{
+    animation: rotateCanvasSmall 20s linear infinite;
 }
-@keyframes rotateCanvas {
+.rotating-canvas.rotate-full{
+    animation: rotateCanvasFull 60s linear infinite;
+}
+@keyframes rotateCanvasSmall {
 
     0%{
         transform: rotate(0deg);
@@ -283,7 +291,14 @@ body{
         transform: rotate(0deg);
     }
 }
-
+@keyframes rotateCanvasFull {
+    from{
+        transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(360deg);
+    }
+}
 /*
 --------------------------------------------------------|
 

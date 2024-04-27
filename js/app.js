@@ -30,8 +30,10 @@ const APP = {
             if(APP.rotatingCanvas.classList.contains('show')){
 
                 APP.rotatingCanvas.classList.remove('show');
-                APP.rotatingCanvas.classList.remove('rotate');
+                APP.rotatingCanvas.classList.remove('rotate-small');
             }
+
+            GameOfLife.setColor('hsl(180 100% 50%)');
 
             APP.animationCallback = ()=>{
 
@@ -47,7 +49,7 @@ const APP = {
             if(APP.rotatingCanvas.classList.contains('show')){
 
                 APP.rotatingCanvas.classList.remove('show');
-                APP.rotatingCanvas.classList.remove('rotate');
+                APP.rotatingCanvas.classList.remove('rotate-small');
             }
 
             APP.animationCallback = ()=>{
@@ -62,7 +64,7 @@ const APP = {
             if(APP.rotatingCanvas.classList.contains('show')){
 
                 APP.rotatingCanvas.classList.remove('show');
-                APP.rotatingCanvas.classList.remove('rotate');
+                APP.rotatingCanvas.classList.remove('rotate-small');
             }
 
             APP.animationCallback = ()=>{
@@ -77,16 +79,51 @@ const APP = {
             if(!APP.rotatingCanvas.classList.contains('show')){
 
                 APP.rotatingCanvas.classList.add('show');
-                APP.rotatingCanvas.classList.add('rotate');
+                APP.rotatingCanvas.classList.add('rotate-small');
+
+            }else{
+
+                if(APP.rotatingCanvas.classList.contains('rotate-full')){
+                    APP.rotatingCanvas.classList.remove('rotate-full');
+                    APP.rotatingCanvas.classList.add('rotate-small');
+                }
             }
+
+            Freaky.setContextColor();
 
             APP.animationCallback = ()=>{
 
                 Freaky.renderCanvasDots();
                 Freaky.renderRotatingCanvasDots();
+
             }
 
-           
+            break;
+
+            case 5:
+
+            if(!APP.rotatingCanvas.classList.contains('show')){
+
+                APP.rotatingCanvas.classList.add('show');
+                APP.rotatingCanvas.classList.add('rotate-full');
+
+            }else{
+
+                if(APP.rotatingCanvas.classList.contains('rotate-small')){
+                    APP.rotatingCanvas.classList.remove('rotate-small');
+                    APP.rotatingCanvas.classList.add('rotate-full');
+                }
+            }
+
+            Freaky.setContextColor('hsl(220 100% 80%)');
+            Freaky.adjustGridPosition();
+
+            APP.animationCallback = ()=>{
+
+                Freaky.renderCanvasGrid();
+                Freaky.renderRotatingCanvasGrid();
+
+            }
 
             break;
         }
@@ -119,6 +156,18 @@ const APP = {
         APP.setState('stopped');
 
         APP.animationId = undefined;
+
+        if(APP.rotatingCanvas.classList.contains('show')){
+
+            APP.rotatingCanvas.classList.remove('show');
+
+            if(APP.rotatingCanvas.classList.contains('rotate-small')){
+                APP.rotatingCanvas.classList.remove('rotate-small');
+            }
+            if(APP.rotatingCanvas.classList.contains('rotate-full')){
+                APP.rotatingCanvas.classList.remove('rotate-full');
+            }
+        }
 
     },
     startAnimation(event){
@@ -198,7 +247,7 @@ const APP = {
 
         GameOfLife.initialize(APP.canvas, innerWidth < 800 ? 4:2);
 
-        GameOfLife.setColor('hsl(180 100% 50%)');
+        // GameOfLife.setColor('hsl(180 100% 50%)');
 
         GameOfLife.buildRandomGrid();
     },
