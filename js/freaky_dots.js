@@ -151,6 +151,9 @@ export const Freaky = {
 
         Freaky.gridColumns = Math.floor(Freaky.canvasWidth/Freaky.resolution);
         Freaky.gridRows = Math.floor(Freaky.canvasHeight/Freaky.resolution);
+
+        if(Freaky.gridColumns % 2 === 0) Freaky.gridColumns--;
+    
         Freaky.gridLength = Freaky.gridColumns * Freaky.gridRows;
         Freaky.grid = new Uint8Array(Freaky.gridLength);
 
